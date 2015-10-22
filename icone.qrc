@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="quit">icons/images/quit.png</file>
+        <file alias="save">icons/images/save.png</file>
+        <file alias="paste">icons/images/paste.png</file>
+        <file alias="open">icons/images/open.png</file>
+        <file alias="new">icons/images/new.png</file>
+        <file alias="cut">icons/images/cut.png</file>
+        <file alias="copy">icons/images/copy.png</file>
+    </qresource>
+</RCC>
