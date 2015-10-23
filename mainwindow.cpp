@@ -59,7 +59,23 @@ MainWindow::~MainWindow()
     delete ui;
 }
 void MainWindow::openFile(){
-    cout<<"openFile()"<<endl;
+
+    QString fileName =
+            QFileDialog::getOpenFileName( this,
+                                          tr("Open File")// titre
+                                          );
+
+    cout<<"openFile:"<<fileName.toStdString()<<endl;
+
+    QFile myOpenFile(fileName);
+    QTextStream stream(&myOpenFile);
+    string line;
+    do {
+                line = stream.readLine().toStdString();
+                cout << line;
+
+            } while(line.empty());
+
 
 }
 void MainWindow::saveFile(){

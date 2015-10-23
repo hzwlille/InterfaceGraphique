@@ -6,6 +6,9 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <iostream>
+#include <QFileDialog>
+#include <QFile>
+#include <QTextStream>
 using namespace std;
 namespace Ui {
 class MainWindow;
