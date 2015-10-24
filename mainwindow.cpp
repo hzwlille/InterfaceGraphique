@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMenuBar * menuBar = this->menuBar( );
     QMenu * fileMenu = menuBar->addMenu( tr ("&Ficher") );
     QToolBar* toolBar=this->addToolBar(tr("File"));
-    QTextEdit* textEdit=new QTextEdit();
+    textEdit=new QTextEdit();
 
     this->setCentralWidget(textEdit);
 
@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     newAction->setStatusTip( tr("New file")); // barre de statut
     fileMenu->addAction(newAction); // rajouter l’action au menu déroulant
     // connecter le signal à un slot de this
-    connect(newAction, SIGNAL(triggered( )), this, SLOT(openFile(textEdit)));
+    connect(newAction, SIGNAL(triggered( )), this, SLOT(openFile()));
 
     QAction * newAction1 = new QAction( QIcon(":/icons/save"), tr("&Save..."), this);
     newAction1->setShortcut( tr("Ctrl+S")); // accélérateur clavier
@@ -48,7 +48,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-
     //ui->setupUi(this);
 QtMainWindow:statusBar();
 
@@ -58,7 +57,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::openFile(QTextEdit* textEdit){
+void MainWindow::openFile(){
 
     QString fileName =
             QFileDialog::getOpenFileName( this,
@@ -74,16 +73,46 @@ void MainWindow::openFile(QTextEdit* textEdit){
     allline = stream.readAll();
     cout << allline.toStdString();
 
-    textEdit->setHtml(allline);
-
+    textEdit->setPlainText(allline);
+    myOpenFile.close();
 
 }
 void MainWindow::saveFile(){
+
+
+    QString fileName =
+            QFileDialog::getSaveFileName( this,
+                                          tr("Save File")// titre
+                                          );
+
+    cout<<"saveFile:"<<fileName.toStdString()<<endl;
+
+    QFile mySaveFile(fileName);
+    mySaveFile.open(QIODevice::Text | QIODevice::WriteOnly);
+    QTextStream stream(&mySaveFile);
+    QString allline=textEdit->toPlainText();
+    stream << allline;
+    mySaveFile.close();
     cout<<"saveFile()"<<endl;
 
 }
 void MainWindow::quitApp(){
-    cout<<"quitApp()"<<endl;
 
+    int reponse=QMessageBox::question(this,"Confirmation", "Vous voulez quitter l'application?",QMessageBox::Yes , QMessageBox::No);
+
+    cout<<"quitApp()"<<endl;
+    if (reponse == QMessageBox::Yes)
+        {
+            QApplication::quit();
+        }
+        else if (reponse == QMessageBox::No)
+        {
+            return;
+        }
+
+}
+void MainWindow::closeEvent(QCloseEvent * e)
+{
+    quitApp();
 }
 

@@ -9,6 +9,8 @@
 #include <QFileDialog>
 #include <QFile>
 #include <QTextStream>
+#include <QMessageBox>
+
 using namespace std;
 namespace Ui {
 class MainWindow;
@@ -22,12 +24,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 public  slots:
-    void openFile(QTextEdit *);
+    void openFile();
     void saveFile();
     void quitApp();
 
 private:
     Ui::MainWindow *ui;
+    QTextEdit* textEdit;
+    virtual void closeEvent(QCloseEvent*);
 };
 
 #endif // MAINWINDOW_H
