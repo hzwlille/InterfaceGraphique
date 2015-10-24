@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     newAction->setStatusTip( tr("New file")); // barre de statut
     fileMenu->addAction(newAction); // rajouter l’action au menu déroulant
     // connecter le signal à un slot de this
-    connect(newAction, SIGNAL(triggered( )), this, SLOT(openFile()));
+    connect(newAction, SIGNAL(triggered( )), this, SLOT(openFile(textEdit)));
 
     QAction * newAction1 = new QAction( QIcon(":/icons/save"), tr("&Save..."), this);
     newAction1->setShortcut( tr("Ctrl+S")); // accélérateur clavier
@@ -58,7 +58,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::openFile(){
+void MainWindow::openFile(QTextEdit* textEdit){
 
     QString fileName =
             QFileDialog::getOpenFileName( this,
@@ -68,13 +68,13 @@ void MainWindow::openFile(){
     cout<<"openFile:"<<fileName.toStdString()<<endl;
 
     QFile myOpenFile(fileName);
+    myOpenFile.open(QIODevice::Text | QIODevice::ReadOnly);
     QTextStream stream(&myOpenFile);
-    string line;
-    do {
-                line = stream.readLine().toStdString();
-                cout << line;
+    QString allline;
+    allline = stream.readAll();
+    cout << allline.toStdString();
 
-            } while(line.empty());
+    textEdit->setHtml(allline);
 
 
 }

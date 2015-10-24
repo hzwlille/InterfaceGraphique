@@ -22,7 +22,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 public  slots:
-    void openFile();
+    void openFile(QTextEdit *);
     void saveFile();
     void quitApp();
 
