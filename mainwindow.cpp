@@ -8,9 +8,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QMenuBar * menuBar = this->menuBar( );
     QMenu * fileMenu = menuBar->addMenu( tr ("&Ficher") );
     QToolBar* toolBar=this->addToolBar(tr("File"));
-    textEdit=new QTextEdit();
+    myZone=new Zone_de_dessin();
+    myZone->setMinimumSize(600,600);
 
-    this->setCentralWidget(textEdit);
+    this->setCentralWidget(myZone);
 
     QAction * newAction = new QAction( QIcon(":/icons/new"), tr("&New..."), this);
     newAction->setShortcut( tr("Ctrl+N")); // accélérateur clavier
@@ -59,40 +60,40 @@ MainWindow::~MainWindow()
 }
 void MainWindow::openFile(){
 
-    QString fileName =
-            QFileDialog::getOpenFileName( this,
-                                          tr("Open File")// titre
-                                          );
+//    QString fileName =
+//            QFileDialog::getOpenFileName( this,
+//                                          tr("Open File")// titre
+//                                          );
 
-    cout<<"openFile:"<<fileName.toStdString()<<endl;
+//    cout<<"openFile:"<<fileName.toStdString()<<endl;
 
-    QFile myOpenFile(fileName);
-    myOpenFile.open(QIODevice::Text | QIODevice::ReadOnly);
-    QTextStream stream(&myOpenFile);
-    QString allline;
-    allline = stream.readAll();
-    cout << allline.toStdString();
+//    QFile myOpenFile(fileName);
+//    myOpenFile.open(QIODevice::Text | QIODevice::ReadOnly);
+//    QTextStream stream(&myOpenFile);
+//    QString allline;
+//    allline = stream.readAll();
+//    cout << allline.toStdString();
 
-    textEdit->setPlainText(allline);
-    myOpenFile.close();
+//    textEdit->setPlainText(allline);
+    //myOpenFile.close();
 
 }
 void MainWindow::saveFile(){
 
 
-    QString fileName =
-            QFileDialog::getSaveFileName( this,
-                                          tr("Save File")// titre
-                                          );
+//    QString fileName =
+//            QFileDialog::getSaveFileName( this,
+//                                          tr("Save File")// titre
+//                                          );
 
-    cout<<"saveFile:"<<fileName.toStdString()<<endl;
+//    cout<<"saveFile:"<<fileName.toStdString()<<endl;
 
-    QFile mySaveFile(fileName);
-    mySaveFile.open(QIODevice::Text | QIODevice::WriteOnly);
-    QTextStream stream(&mySaveFile);
-    QString allline=textEdit->toPlainText();
-    stream << allline;
-    mySaveFile.close();
+//    QFile mySaveFile(fileName);
+//    mySaveFile.open(QIODevice::Text | QIODevice::WriteOnly);
+//    QTextStream stream(&mySaveFile);
+//    QString allline=textEdit->toPlainText();
+//    stream << allline;
+//    mySaveFile.close();
     cout<<"saveFile()"<<endl;
 
 }

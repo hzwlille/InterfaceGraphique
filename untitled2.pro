@@ -13,11 +13,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    zone_de_dessin.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    zone_de_dessin.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    zone_de_dessin.ui
 
 RESOURCES += \
     icone.qrc

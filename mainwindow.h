@@ -10,7 +10,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QMessageBox>
-
+#include "zone_de_dessin.h"
 using namespace std;
 namespace Ui {
 class MainWindow;
@@ -30,7 +30,9 @@ public  slots:
 
 private:
     Ui::MainWindow *ui;
-    QTextEdit* textEdit;
+    Zone_de_dessin* myZone;
+
+
     virtual void closeEvent(QCloseEvent*);
 };
 
